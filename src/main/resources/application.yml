@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: ad-trade-processor  
+  
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:file:./data/db1;MODE=MYSQL
+    username: sa
+    password: password
+  
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        trace: false
+        web-allow-others: false
+  
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate.ddl-auto: none
+    
+  
+  
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+          
+server:
+  port: 8092
+  servlet.context-path: /    
+
+management:
+  security:
+    enabled: false
+
