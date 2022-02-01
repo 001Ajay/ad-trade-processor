@@ -1,26 +1,34 @@
 package org.dev.ad.model;
 
-import java.math.BigDecimal;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import java.math.BigDecimal;
 
-import lombok.Data;
 
-@Data
 @Entity
-@Table(name = "txn")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Trade {
-	
-	private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long txn_id;
-	private Long portfolio_id;
-	private String stock;
-	private String type;
-	private BigDecimal qty;
-	private BigDecimal price;
-	private BigDecimal amount;
-
+     @Id
+     @GeneratedValue(strategy = GenerationType.AUTO)
+     private Long tradeId;
+     String stock;
+     String ticker;
+     int qty;
+     BigDecimal price;
+     BigDecimal amount;
+     int portfolioId;
+     BigDecimal currentPrice;
+     BigDecimal delta;
+     String status;
+     String trade_date;
 }

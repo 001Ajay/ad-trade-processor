@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import javax.validation.Valid;
 
 import org.dev.ad.exception.MadException;
-import org.dev.ad.model.Trade;
+import org.dev.ad.model.Txn;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("/mock/txn")
-public class MockTradeController  {
+public class MockTxnController { // TODO: Possible redundant class
 	
 	@GetMapping("/all")
 	public @ResponseBody String findAll() {
@@ -62,40 +62,40 @@ public class MockTradeController  {
 	}
 	
 	@GetMapping("/buy")
-	public Trade buy(@ApiParam(value = "Add object in database table", required = true) 
+	public Txn buy(@ApiParam(value = "Add object in database table", required = true)
 		@Valid @RequestParam long portfolioId,
-		@Valid @RequestParam String stock,
-		@Valid @RequestParam BigDecimal qty,
-		@Valid @RequestParam BigDecimal price
+				   @Valid @RequestParam String stock,
+				   @Valid @RequestParam BigDecimal qty,
+				   @Valid @RequestParam BigDecimal price
 		) {
 		
-		Trade trade = createTrade(portfolioId, stock, "BUY", qty, price);
+		Txn txn = createTrade(portfolioId, stock, "BUY", qty, price);
 				
-		return trade;
+		return txn;
 	}
 	
 	@GetMapping("/sell")
-	public Trade sell(@ApiParam(value = "Add object in database table", required = true) 
+	public Txn sell(@ApiParam(value = "Add object in database table", required = true)
 		@Valid @RequestParam long portfolioId,
-		@Valid @RequestParam String stock,
-		@Valid @RequestParam BigDecimal qty,
-		@Valid @RequestParam BigDecimal price
+					@Valid @RequestParam String stock,
+					@Valid @RequestParam BigDecimal qty,
+					@Valid @RequestParam BigDecimal price
 		) {
 		
-		Trade trade = createTrade(portfolioId, stock, "SELL", qty, price);
+		Txn txn = createTrade(portfolioId, stock, "SELL", qty, price);
 				
-		return trade;
+		return txn;
 	}
 
-	private Trade createTrade(long portfolioId, String stock, String type, BigDecimal qty, BigDecimal price) {
-		Trade trade = new Trade();
-		trade.setPortfolio_id(portfolioId);
-		trade.setStock(stock);
-		trade.setType(type);
-		trade.setQty(qty);
-		trade.setPrice(price);
-		trade.setAmount(price.multiply(qty));
-		return trade;
+	private Txn createTrade(long portfolioId, String stock, String type, BigDecimal qty, BigDecimal price) {
+		Txn txn = new Txn();
+		txn.setPortfolio_id(portfolioId);
+		txn.setStock(stock);
+		txn.setType(type);
+		txn.setQty(qty);
+		txn.setPrice(price);
+		txn.setAmount(price.multiply(qty));
+		return txn;
 	}
 
 }

@@ -33,3 +33,7 @@ insert into txn(stock,type,qty,price,amount,portfolio_id, trade_date) values('Ye
 insert into txn(stock,type,qty,price,amount,portfolio_id, trade_date) values('Yes Bank','BUY',1000,58.77,58770.00,1,'2020-05-12');
 insert into txn(stock,type,qty,price,amount,portfolio_id, trade_date) values('Hexaware','BUY',100,257.8,25780.00,1,'2020-05-12');
 insert into txn(stock,type,qty,price,amount,portfolio_id, trade_date) values('Aptech','BUY',100,103.15,10315.00,1,'2020-05-12');
+
+insert into trade(stock,ticker,type,qty,price,amount,portfolio_id,trade_date) values('Aptech','APTECHT','BUY',100,103.15,10315.00,1,'2020-05-12');
+insert into trade(stock,ticker,type,qty,price,amount,portfolio_id,trade_date) values('Aptech','APTECHT','BUY',300,108.75,10315.00,1,'2020-07-20');
+insert into trade(stock,ticker,type,qty,price,amount,portfolio_id,trade_date) values('Aptech','APTECHT','BUY',450,114.55,10315.00,1,'2020-08-18');

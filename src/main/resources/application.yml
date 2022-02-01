@@ -37,3 +37,10 @@ management:
   security:
     enabled: false
 
+logging:
+  pattern:
+    console: Log - %msg%n
+  level:
+    root: error
+    org.dev.ad: debug
+
