@@ -30,5 +30,5 @@ public class Trade {
      BigDecimal currentPrice;
      BigDecimal delta;
      String status;
-     String trade_date;
+     String tradeDate;
 }

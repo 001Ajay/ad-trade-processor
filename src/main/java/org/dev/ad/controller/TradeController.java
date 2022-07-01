@@ -5,6 +5,7 @@ import org.dev.ad.model.Trade;
 import org.dev.ad.service.TradeService;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -25,9 +26,17 @@ public class TradeController {
 
     @GetMapping("/trades")
     public List<Trade> getTrades(){
-//        return List.of(Trade.builder().stock("SBI").ticker("SBIN").qty(10).price(254.25).amount(2542.5).build());
         log.debug("Get all trades...");
-        return service.fetchTrades();
+        List<Trade> trades = service.fetchTrades();
+        postProcessTrades(trades);
+        log.debug("[%s] trades found...", trades.size());
+        return trades;
+    }
+
+    private void postProcessTrades(List<Trade> trades) {
+        trades.stream().forEach(trade -> {
+            trade.setAmount(trade.getPrice().multiply(BigDecimal.valueOf(trade.getQty())));
+        });
     }
 
     @PostMapping("/trades/{id}")

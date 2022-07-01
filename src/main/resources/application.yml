@@ -1,10 +1,16 @@
 spring:
   application:
-    name: ad-trade-processor  
-  
+    name: ad-trade-processor
+  profiles:
+    active: local
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+
   datasource:
     driverClassName: org.h2.Driver
-    url: jdbc:h2:file:./data/db1;MODE=MYSQL
+    url: jdbc:h2:file:./data/db3;MODE=MYSQL
     username: sa
     password: password
   
@@ -44,3 +50,14 @@ logging:
     root: error
     org.dev.ad: debug
 
+trade-processor:
+  stopLossPercent: 5
+  breakEvenPercent: 3
+  profitPercent1: 7
+  profitPercent2: 10
+  profitPercent3: 15
+
+crawler:
+  urls:
+    downloads:
+      - https://www.xvideos.com/video66698345/tall_beautiful_delhi_girl_brutally_fucked_by_her_brother
