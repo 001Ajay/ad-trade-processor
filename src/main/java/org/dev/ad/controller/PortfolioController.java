@@ -48,6 +48,8 @@ public class PortfolioController {
 
                 return TradeObj.builder()
                         .id(trade.getId())
+                        .stock(security.getName())
+                        .ticker(security.getTicker())
                         .type(trade.getType())
                         .qty(trade.getQty())
                         .price(trade.getPrice())

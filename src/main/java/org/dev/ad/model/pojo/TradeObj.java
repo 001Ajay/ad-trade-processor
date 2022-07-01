@@ -15,6 +15,8 @@ import java.math.BigInteger;
 public class TradeObj {
 
     private Long id;
+    private String stock;
+    private String ticker;
     private String type;
     private BigInteger qty;
     private BigDecimal price;
