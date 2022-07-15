@@ -51,6 +51,7 @@ public class PortfolioController {
                         .stock(security.getName())
                         .ticker(security.getTicker())
                         .type(trade.getType())
+                        .demat(security.getDemat())
                         .qty(trade.getQty())
                         .price(trade.getPrice())
                         .amount(trade.getAmount())

@@ -17,6 +17,7 @@ public class TradeObj {
     private Long id;
     private String stock;
     private String ticker;
+    private String demat;
     private String type;
     private BigInteger qty;
     private BigDecimal price;
