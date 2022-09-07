@@ -18,8 +18,10 @@ public class SecurityObj {
     private String name;
     private String ticker;
     private BigDecimal invested;
+    private BigDecimal ltp;
     private BigDecimal valuation;
     private BigInteger qty;
     private BigDecimal avgPrice;
     private Set<TradeObj> trades;
+    private BigDecimal profit;
 }

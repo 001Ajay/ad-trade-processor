@@ -28,5 +28,8 @@ public class TradeObj {
     private BigDecimal profitPercent1;
     private BigDecimal profitPercent2;
     private BigDecimal profitPercent3;
+    private BigDecimal ltp;
+    private BigDecimal valuation;
+    private BigDecimal profit;
 
 }
