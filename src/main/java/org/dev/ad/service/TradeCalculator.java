@@ -48,8 +48,8 @@ public class TradeCalculator {
         return ltp.multiply(BigDecimal.valueOf(qty.doubleValue()));
     }
 
-    public BigDecimal calculateProfitPerc(BigDecimal invested, BigDecimal profit){
-        return profit.divide(invested, RoundingMode.HALF_UP).multiply(BD_100);
+    public BigDecimal findProfitPerc(BigDecimal invested, BigDecimal profit){
+        return profit.divide(invested, 2, RoundingMode.HALF_UP).multiply(BD_100);
     }
 
 }

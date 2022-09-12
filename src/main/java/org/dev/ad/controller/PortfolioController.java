@@ -6,6 +6,7 @@ import org.dev.ad.feign.TradeStoreClient;
 import org.dev.ad.model.pojo.SecurityObj;
 import org.dev.ad.model.pojo.TradeObj;
 import org.dev.ad.model.tradeStore.Security;
+import org.dev.ad.model.tradeStore.Trade;
 import org.dev.ad.service.InstrumentService;
 import org.dev.ad.service.TradeCalculator;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.RoundingMode;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @RestController
@@ -39,6 +40,7 @@ public class PortfolioController {
         this.securityObjList = Lists.newArrayList();
         reloadInformation();
     }
+    private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @GetMapping(value="/reload")
     public List<SecurityObj> reloadInformation(){
@@ -54,12 +56,20 @@ public class PortfolioController {
             Optional<BigDecimal> aPrice = instrumentService.getPrice(ticker);
             BigDecimal ltp = aPrice.orElse(BigDecimal.ZERO);
 
-            Set<TradeObj> tradeObjs = security.getTrades().stream().map(trade -> {
+            Stream<Trade> trades = security.getTrades().stream().sorted((o1, o2) -> {
+                LocalDate dateTime1 = LocalDate.parse(o1.getDate(), dateTimeFormatter);
+                LocalDate dateTime2 = LocalDate.parse(o2.getDate(), dateTimeFormatter);
+                return dateTime1.compareTo(dateTime2);
+            });
+
+            Set<TradeObj> tradeObjs = trades.map(trade -> {
                 BigDecimal investment = trade.getAmount();
                 BigInteger qty = trade.getQty();
                 BigDecimal valuation = tradeCalculator.findValuation(qty, ltp);
-                BigDecimal stopLossPercent = tradeCalculator.findStopLoss(investment);
+                BigDecimal stopLoss = tradeCalculator.findStopLoss(investment);
                 BigDecimal breakEvenPercent = tradeCalculator.findBreakEven(investment);
+                BigDecimal profit = valuation.subtract(investment);
+                BigDecimal profitPercent = tradeCalculator.findProfitPerc(investment, profit);
                 BigDecimal profitPercent1 = tradeCalculator.findProfitPercent1(investment);
                 BigDecimal profitPercent2 = tradeCalculator.findProfitPercent2(investment);
                 BigDecimal profitPercent3 = tradeCalculator.findProfitPercent3(investment);
@@ -74,14 +84,15 @@ public class PortfolioController {
                         .price(trade.getPrice())
                         .amount(investment)
                         .date(trade.getDate())
-                        .stopLossPercent(stopLossPercent)
+                        .stopLoss(stopLoss)
                         .breakEvenPercent(breakEvenPercent)
                         .profitPercent1(profitPercent1)
                         .profitPercent2(profitPercent2)
                         .profitPercent3(profitPercent3)
                         .ltp(ltp)
                         .valuation(valuation)
-                        .profit(valuation.subtract(investment))
+                        .profit(profit)
+                        .profitPercent(profitPercent)
                         .build();
             })
                     .collect(Collectors.toSet());
@@ -89,7 +100,7 @@ public class PortfolioController {
             BigDecimal valuation = tradeCalculator.findValuation(security.getQty(), ltp);
             BigDecimal invested = security.getInvested();
             BigDecimal profit = valuation.subtract(invested);
-            BigDecimal profitPercent = tradeCalculator.calculateProfitPerc(profit, invested);
+            BigDecimal profitPercent = tradeCalculator.findProfitPerc(invested, profit);
             SecurityObj securityObj = SecurityObj.builder()
                     .id(security.getId())
                     .name(security.getName())

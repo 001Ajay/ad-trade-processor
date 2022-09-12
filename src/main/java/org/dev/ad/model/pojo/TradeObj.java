@@ -23,7 +23,7 @@ public class TradeObj {
     private BigDecimal price;
     private BigDecimal amount;
     private String date;
-    private BigDecimal stopLossPercent;
+    private BigDecimal stopLoss;
     private BigDecimal breakEvenPercent;
     private BigDecimal profitPercent1;
     private BigDecimal profitPercent2;
@@ -31,5 +31,6 @@ public class TradeObj {
     private BigDecimal ltp;
     private BigDecimal valuation;
     private BigDecimal profit;
+    private BigDecimal profitPercent;
 
 }
