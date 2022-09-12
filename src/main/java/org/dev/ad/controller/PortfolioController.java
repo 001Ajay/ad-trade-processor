@@ -57,12 +57,12 @@ public class PortfolioController {
             Set<TradeObj> tradeObjs = security.getTrades().stream().map(trade -> {
                 BigDecimal investment = trade.getAmount();
                 BigInteger qty = trade.getQty();
+                BigDecimal valuation = tradeCalculator.findValuation(qty, ltp);
                 BigDecimal stopLossPercent = tradeCalculator.findStopLoss(investment);
                 BigDecimal breakEvenPercent = tradeCalculator.findBreakEven(investment);
                 BigDecimal profitPercent1 = tradeCalculator.findProfitPercent1(investment);
                 BigDecimal profitPercent2 = tradeCalculator.findProfitPercent2(investment);
                 BigDecimal profitPercent3 = tradeCalculator.findProfitPercent3(investment);
-                BigDecimal valuation = tradeCalculator.findValuation(qty, ltp);
 
                 return TradeObj.builder()
                         .id(trade.getId())
@@ -88,17 +88,20 @@ public class PortfolioController {
 
             BigDecimal valuation = tradeCalculator.findValuation(security.getQty(), ltp);
             BigDecimal invested = security.getInvested();
+            BigDecimal profit = valuation.subtract(invested);
+            BigDecimal profitPercent = tradeCalculator.calculateProfitPerc(profit, invested);
             SecurityObj securityObj = SecurityObj.builder()
                     .id(security.getId())
                     .name(security.getName())
                     .ticker(ticker)
-                    .invested(valuation)
+                    .invested(invested)
                     .qty(security.getQty())
                     .avgPrice(security.getAvgPrice())
                     .trades(tradeObjs)
                     .ltp(ltp)
                     .valuation(valuation)
-                    .profit(valuation.subtract(invested))
+                    .profit(profit)
+                    .profitPercent(profitPercent)
                     .build();
             securityObjList.add(securityObj);
         }

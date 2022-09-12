@@ -24,4 +24,5 @@ public class SecurityObj {
     private BigDecimal avgPrice;
     private Set<TradeObj> trades;
     private BigDecimal profit;
+    private BigDecimal profitPercent;
 }
