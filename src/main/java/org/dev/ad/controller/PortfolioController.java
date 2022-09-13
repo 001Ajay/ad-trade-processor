@@ -56,13 +56,7 @@ public class PortfolioController {
             Optional<BigDecimal> aPrice = instrumentService.getPrice(ticker);
             BigDecimal ltp = aPrice.orElse(BigDecimal.ZERO);
 
-            Stream<Trade> trades = security.getTrades().stream().sorted((o1, o2) -> {
-                LocalDate dateTime1 = LocalDate.parse(o1.getDate(), dateTimeFormatter);
-                LocalDate dateTime2 = LocalDate.parse(o2.getDate(), dateTimeFormatter);
-                return dateTime1.compareTo(dateTime2);
-            });
-
-            Set<TradeObj> tradeObjs = trades.map(trade -> {
+            Set<TradeObj> tradeObjs = security.getTrades().stream().map(trade -> {
                 BigDecimal investment = trade.getAmount();
                 BigInteger qty = trade.getQty();
                 BigDecimal valuation = tradeCalculator.findValuation(qty, ltp);
@@ -79,7 +73,7 @@ public class PortfolioController {
                         .stock(security.getName())
                         .ticker(ticker)
                         .type(trade.getType())
-                        .demat(security.getDemat())
+                        .demat(trade.getDemat())
                         .qty(qty)
                         .price(trade.getPrice())
                         .amount(investment)
@@ -96,6 +90,15 @@ public class PortfolioController {
                         .build();
             })
                     .collect(Collectors.toSet());
+
+//            tradeObjs.stream().sorted((o1, o2) -> {
+//                LocalDate dateTime1 = LocalDate.parse(o1.getDate(), dateTimeFormatter);
+//                LocalDate dateTime2 = LocalDate.parse(o2.getDate(), dateTimeFormatter);
+//                return dateTime1.compareTo(dateTime2);
+//            });
+
+//            tradeObjs.stream().sorted(Comparator.comparing(TradeObj::getDate));
+//            tradeObjs.stream().sorted((Comparator.comparing(TradeObj::getDate)));
 
             BigDecimal valuation = tradeCalculator.findValuation(security.getQty(), ltp);
             BigDecimal invested = security.getInvested();

@@ -19,4 +19,5 @@ public class Trade {
     private BigDecimal price;
     private BigDecimal amount;
     private String date;
+    private String demat;
 }

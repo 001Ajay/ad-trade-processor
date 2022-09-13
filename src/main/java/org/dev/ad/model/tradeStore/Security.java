@@ -17,7 +17,6 @@ public class Security {
     private Long id;
     private String name;
     private String ticker;
-    private String demat;
     private BigDecimal invested;
     private BigDecimal valuation;
     private BigInteger qty;
