@@ -26,8 +26,14 @@ public class SwaggerConfig {
 	}
 
 	private ApiInfo apiEndPointsInfo() {
-		return new ApiInfoBuilder().title("Spring Boot REST API").description("Employee Management REST API")
-				.contact(new Contact("Ajay Das", "www.google.com", "ajaydas5478@gmail.com")).license("Apache 2.0")
-				.licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html").version("1.0.0").build();
+		return new ApiInfoBuilder()
+				.title("ad-trade-processor")
+				.description("Trade Processor REST APIs")
+				.contact(
+						new Contact("Ajay Das", "www.google.com", "ajaydas5478@gmail.com"))
+				.license("Apache 2.0")
+				.licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
+				.version("1.0.0")
+				.build();
 	}
 }

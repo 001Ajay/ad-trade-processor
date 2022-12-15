@@ -6,7 +6,6 @@ import org.dev.ad.feign.TradeStoreClient;
 import org.dev.ad.model.pojo.SecurityObj;
 import org.dev.ad.model.pojo.TradeObj;
 import org.dev.ad.model.tradeStore.Security;
-import org.dev.ad.model.tradeStore.Trade;
 import org.dev.ad.service.InstrumentService;
 import org.dev.ad.service.TradeCalculator;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Slf4j
 @RestController
