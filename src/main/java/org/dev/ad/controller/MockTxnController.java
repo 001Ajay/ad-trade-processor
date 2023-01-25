@@ -1,36 +1,26 @@
 package org.dev.ad.controller;
 
-import java.math.BigDecimal;
-
-import javax.validation.Valid;
-
+import io.swagger.annotations.ApiParam;
 import org.dev.ad.exception.MadException;
 import org.dev.ad.model.Txn;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import io.swagger.annotations.ApiParam;
+import javax.validation.Valid;
+import java.math.BigDecimal;
 
-@RestController
-@RequestMapping("/mock/txn")
+//@RestController
+//@RequestMapping("/mock/txn")
 public class MockTxnController { // TODO: Possible redundant class
-	
+
 	@GetMapping("/all")
-	public @ResponseBody String findAll() {
-		return "{[\n" + 
-				"                [\"Dakota Rice\", \"Niger\", \"Oud-Turnhout\", \"$36,738\"],\n" + 
-				"                [\"Minerva Hooper\", \"Curaçao\", \"Sinaai-Waas\", \"$23,789\"],\n" + 
-				"                [\"Sage Rodriguez\", \"Netherlands\", \"Baileux\", \"$56,142\"],\n" + 
-				"                [\"Philip Chaney\", \"Korea, South\", \"Overland Park\", \"$38,735\"],\n" + 
+	public @ResponseBody
+	String findAll() {
+		return "{[\n" +
+				"                [\"Dakota Rice\", \"Niger\", \"Oud-Turnhout\", \"$36,738\"],\n" +
+				"                [\"Minerva Hooper\", \"Curaçao\", \"Sinaai-Waas\", \"$23,789\"],\n" +
+				"                [\"Sage Rodriguez\", \"Netherlands\", \"Baileux\", \"$56,142\"],\n" +
+				"                [\"Philip Chaney\", \"Korea, South\", \"Overland Park\", \"$38,735\"],\n" +
 				"                [\"Doris Greene\", \"Malawi\", \"Feldkirchen in Kärnten\", \"$63,542\"],\n" + 
 				"                [\"Mason Porter\", \"Chile\", \"Gloucester\", \"$78,615\"]\n" + 
 				"              ]}";
