@@ -9,5 +9,7 @@ Port : 8092
 ##Docker :
 
 Build image : 
-`cd ad-zuul-server`
-`docker build -t ad-docker-repo/ad-trade-processor:v0.0.1 .`
+
+`cd ad-trade-processor`
+
+`docker build -t ad/ad-trade-processor:latest .`
