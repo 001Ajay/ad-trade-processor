@@ -12,14 +12,16 @@ import java.math.RoundingMode;
 public class TradeCalculator {
 
     private static BigDecimal BD_100 = BigDecimal.valueOf(100);
+    private static int scale = 6;
+    private static RoundingMode rounding = RoundingMode.HALF_UP;
 
     @Autowired
     private ApplicationConfig applicationConfig;
 
-    public BigDecimal findStopLoss(BigDecimal amount){
+    public BigDecimal findStopLoss(BigDecimal amount) {
         return amount.subtract((
                 amount.multiply(applicationConfig.getStopLossPercent())
-                        .divide(BD_100, 2, RoundingMode.HALF_UP)));
+                        .divide(BD_100, scale, rounding)));
     }
 
     public BigDecimal findBreakEven(BigDecimal amount){
@@ -41,7 +43,7 @@ public class TradeCalculator {
     public BigDecimal addPercent(BigDecimal amount, BigDecimal percentage){
         return amount.add((
                 amount.multiply(percentage)
-                        .divide(BD_100, 2, RoundingMode.HALF_UP)));
+                        .divide(BD_100, scale, rounding)));
     }
 
     public BigDecimal findValuation(BigInteger qty, BigDecimal ltp){
@@ -49,7 +51,7 @@ public class TradeCalculator {
     }
 
     public BigDecimal findProfitPerc(BigDecimal invested, BigDecimal profit){
-        return profit.divide(invested, 2, RoundingMode.HALF_UP).multiply(BD_100);
+        return profit.divide(invested, scale, rounding).multiply(BD_100);
     }
 
 }

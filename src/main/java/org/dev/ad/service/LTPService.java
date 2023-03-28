@@ -10,27 +10,23 @@ import org.dev.ad.utils.FileUtils;
 import org.dev.ad.utils.JsonUtils;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 @Service
-public class InstrumentService {
+public class LTPService {
 
     private static Path LAST_TRADED_PRICE_FILEPATH = Paths.get("src/main/resources/lastTradedPrice.json");
     private static ObjectMapper mapper = new ObjectMapper();
+    @Getter
+    private Map<String, BigDecimal> instrumentPrices = Maps.newHashMap();
 
-    @Getter private Map<String, BigDecimal> instrumentPrices;
-
-    public InstrumentService() {
-        instrumentPrices = Maps.newHashMap();
-        loadLTPsFromFile();
-    }
-
+    @PostConstruct
     public void loadLTPsFromFile() {
         instrumentPrices.clear();
         try {
@@ -38,7 +34,9 @@ public class InstrumentService {
             log.debug("Loading fileContent : \n{}", fileContent);
             HashMap<String, Object> hashMap = mapper.readValue(fileContent, HashMap.class);
             for (Map.Entry<String, Object> entry : hashMap.entrySet()) {
-                instrumentPrices.put(entry.getKey(), new BigDecimal(entry.getValue().toString()));
+                String ticker = entry.getKey().toUpperCase();
+                BigDecimal ltp = new BigDecimal(entry.getValue().toString());
+                instrumentPrices.put(ticker, ltp);
             }
             log.debug(String.valueOf(instrumentPrices));
         } catch (Exception e) {
@@ -46,13 +44,14 @@ public class InstrumentService {
         }
     }
 
-    public Optional<BigDecimal> getPrice(@NonNull String ticker) {
-        return Optional.ofNullable(instrumentPrices.get(ticker.trim()));
+    public BigDecimal getLtp(@NonNull String ticker) {
+        BigDecimal ltp = instrumentPrices.get(ticker.toUpperCase());
+        return ltp != null ? ltp : BigDecimal.ZERO;
     }
 
-    public void setPrice(String ticker, String ltp) {
-        instrumentPrices.put(ticker, new BigDecimal(ltp));
-        saveAllInstrumentPrices();
+    public void setLtp(@NonNull String ticker, BigDecimal ltp) {
+        if (ltp != null)
+            instrumentPrices.put(ticker, ltp);
     }
 
     public String saveAllInstrumentPrices() {
@@ -67,4 +66,5 @@ public class InstrumentService {
             return instrumentPrices.toString();
         }
     }
+
 }
