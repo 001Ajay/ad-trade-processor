@@ -61,3 +61,57 @@ crawler:
   urls:
     downloads:
       - https://www.xvideos.com/video66698345/tall_beautiful_delhi_girl_brutally_fucked_by_her_brother
+
+instruments:
+  names:
+    APTECHT: ApTech
+    ASTRAL: Astral Pipes
+    AUROPHARMA: Aurobindo Pharmaceuticals
+    AXISBANK: Axis Bank
+    BAJFINANCE: Bajaj Finance
+    BHARTIARTL: Bharti Airtel
+    BIOCON: BioCon Pharmaceuticals
+    CCL: CCL Products
+    DEEPAKNTR: Deepak Nitrite
+    ESCORTS: Escorts Kubota International
+    LALPATHLAB: Dr. Lal PathLabs
+    FEDERALBNK: Federal Bank
+    GLENMARK: Glenmark Pharmaceuticals
+    GOKEX: GokulDas Exports
+    HDFCBANK: HDFC Bank
+    ICICIBANK: ICICI Bank
+    INFY: Infosys Ltd
+    JUBLINGREA: Jubilant Ingrevia
+    KOTAKBANK: Kotak Bank
+    MPHASIS: Mphasis Ltd.
+    NCC: NCC Ltd.
+    RAJRATAN: RajRatan Global Wires
+    SBIN: State Bank of India
+    TATASTEEL: Tata Steel Ltd.
+    YESBANK: Yes Bank
+  ltp:
+    APTECHT: 330.40
+    ASTRAL: 1333.55
+    AUROPHARMA: 500.45
+    AXISBANK: 839.90
+    BAJFINANCE: 5649.25
+    BHARTIARTL: 762.45
+    BIOCON: 198.70
+    CCL: 558.20
+    DEEPAKNTR: 1780.70
+    ESCORTS: 1831.60
+    LALPATHLAB: 1817.10
+    FEDERALBNK: 126.85
+    GLENMARK: 425.70
+    GOKEX: 369.70
+    HDFCBANK: 1560.65
+    ICICIBANK: 852.40
+    INFY: 1380.65
+    JUBLINGREA: 381.50
+    KOTAKBANK: 1692.15
+    MPHASIS: 1737.40
+    NCC: 101.90
+    RAJRATAN: 781.30
+    SBIN: 505.35
+    TATASTEEL: 102.10
+    YESBANK: 15.05
