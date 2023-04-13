@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.dev.ad.config.ApplicationConfig;
 import org.dev.ad.model.pojo.SecurityObj;
 import org.dev.ad.model.pojo.TradeObj;
 import org.dev.ad.service.TradeCalculator;
@@ -193,8 +194,10 @@ public class PositionRepository {
                 .build();
     }
 
-    private static SimpleDateFormat originalDateFormat = new SimpleDateFormat("yyyyMMdd");
-    private static SimpleDateFormat targetDateFormat = new SimpleDateFormat("yyyy-MMM-dd", Locale.ENGLISH);
+    private static SimpleDateFormat originalDateFormat =
+            new SimpleDateFormat(ApplicationConfig.APP_TRADE_FILE_DATE_FORMAT);
+    private static SimpleDateFormat targetDateFormat =
+            new SimpleDateFormat(ApplicationConfig.APP_DATE_FORMAT, Locale.ENGLISH);
 
     private static Function<String, String> formatDate = dateStr -> {
         try {
