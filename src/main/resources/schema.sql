@@ -14,6 +14,15 @@ CREATE TABLE `txn` (
 	PRIMARY KEY (`txn_id`)
 );
 
+drop table if exists `instrument`;
+CREATE TABLE `instrument` (
+	`instrument_id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(60),
+	`ticker` VARCHAR(60),
+	`ltp` DOUBLE(6),
+	PRIMARY KEY (`instrument_id`)
+);
+
 
 drop table if exists `menu`;
 CREATE TABLE `menu` (

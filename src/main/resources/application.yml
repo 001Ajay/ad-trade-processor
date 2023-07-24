@@ -3,9 +3,9 @@ spring:
     name: ad-trade-processor
   profiles:
     active: local
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+  # mvc:
+  #   pathmatch:
+  #     matching-strategy: ant_path_matcher
 
 
   datasource:
@@ -24,7 +24,8 @@ spring:
   
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-    hibernate.ddl-auto: none
+    hibernate:
+      ddl-auto: update
     
   
   
